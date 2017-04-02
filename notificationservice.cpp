@@ -33,7 +33,7 @@ public slots:
     {
         int id;
         uint replacesId;
-        QString packageName, appName, appIcon, summary, body;
+        QString packageName, appName, appIcon, summary, body, vibrate;
 
         mReader.addData(value);
 
@@ -46,6 +46,7 @@ public slots:
                     else if(mReader.name() == "ai") appIcon = mReader.readElementText();
                     else if(mReader.name() == "su") summary = mReader.readElementText();
                     else if(mReader.name() == "bo") body = mReader.readElementText();
+                    else if(mReader.name() == "vb") vibrate = mReader.readElementText();
                     else mReader.skipCurrentElement();
                 }
                 mReader.clear();
@@ -57,6 +58,7 @@ public slots:
                 hints.insert("x-nemo-preview-summary", summary);
                 hints.insert("x-nemo-feedback", "information_strong");
                 hints.insert("urgency", 3);
+                hints.insert("vibrate", vibrate);
 
                 QList<QVariant> argumentList;
                 argumentList << appName;
