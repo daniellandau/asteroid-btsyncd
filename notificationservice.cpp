@@ -56,9 +56,15 @@ public slots:
                 QVariantMap hints;
                 hints.insert("x-nemo-preview-body", body);
                 hints.insert("x-nemo-preview-summary", summary);
-                hints.insert("x-nemo-feedback", "information_strong");
+
+                if (!vibrate || vibrate.compare("none") == 0)
+                  hints.insert("x-nemo-feedback", "notifier");
+                else if (vibrate.compare("normal") == 0)
+                  hints.insert("x-nemo-feedback", "chat");
+                else if (vibrate.compare("strong") == 0)
+                  hints.insert("x-nemo-feedback", "information_strong");
+
                 hints.insert("urgency", 3);
-                hints.insert("vibrate", vibrate);
 
                 QList<QVariant> argumentList;
                 argumentList << appName;
